@@ -1,5 +1,5 @@
 import initAxiosInstance from './axios'
 
-const axios = initAxiosInstance('https://www.themoviedb.org')
+const axios = initAxiosInstance(process.env.API_BASE_URL ?? '')
 
 export default axios
