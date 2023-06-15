@@ -1,5 +1,6 @@
 import React from 'react'
-import Navbar from '@/UI/Navbar/pagemovie-catalog'
+import Navbar from '@/app/ui/Navbar/pagemovie-catalog'
+import Providers from './util/react-query/provider'
 
 export const metadata = {
   title: 'Movie-Catalog',
@@ -14,8 +15,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        {children}
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
       </body>
     </html>
   )
