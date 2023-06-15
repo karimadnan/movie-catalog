@@ -7,6 +7,6 @@ export const getTopRatedMoviesList = async (
   page: number
 ): Promise<AxiosResponse<MoviesResponse>> => {
   const url = `${topRatedMoviesURL}?language=en-US&page=${page}`
-  const response = await axios.get(url)
+  const response: AxiosResponse<MoviesResponse> = await axios.get(url)
   return response
 }
