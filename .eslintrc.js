@@ -21,6 +21,7 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
+    '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/triple-slash-reference': 'off',
     '@typescript-eslint/promise-function-async': 'off',
     'import/prefer-default-export': 'off',
