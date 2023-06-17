@@ -1,10 +1,11 @@
 import { InputBase, alpha, styled } from '@mui/material'
+import emotionStyled from '@emotion/styled'
 
 const StyledContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: theme.spacing(10, 0),
+  padding: theme.spacing(15, 0, 10, 0),
 }))
 
 const StyledSearchBar = styled('div')(({ theme }) => ({
@@ -26,4 +27,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   caretColor: theme.palette.secondary.main,
 }))
 
-export { StyledContainer, StyledSearchBar, StyledInputBase }
+const StyledMovieCardsContainer = emotionStyled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 10px;
+  padding: 0 10px;
+`
+
+export {
+  StyledContainer,
+  StyledSearchBar,
+  StyledInputBase,
+  StyledMovieCardsContainer,
+}
