@@ -5,7 +5,7 @@ const StyledContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: theme.spacing(15, 0, 10, 0),
+  padding: theme.spacing(0, 0, 7, 0),
 }))
 
 const StyledSearchBar = styled('div')(({ theme }) => ({
@@ -31,7 +31,6 @@ const StyledMovieCardsContainer = emotionStyled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 10px;
-  padding: 0 10px;
 `
 
 export {

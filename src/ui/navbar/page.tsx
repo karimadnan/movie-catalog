@@ -3,14 +3,14 @@
 import LiveTvIcon from '@mui/icons-material/LiveTv'
 import { Toolbar } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
-import { StyledTypography } from './style'
+import { StyledNavbarTitle } from './style'
 
 export default function Navbar() {
   return (
     <AppBar position="fixed">
       <Toolbar>
         <LiveTvIcon color="secondary" fontSize="large" />
-        <StyledTypography
+        <StyledNavbarTitle
           variant="h6"
           noWrap
           sx={{
@@ -20,7 +20,7 @@ export default function Navbar() {
           }}
         >
           Movie Catalog
-        </StyledTypography>
+        </StyledNavbarTitle>
       </Toolbar>
     </AppBar>
   )

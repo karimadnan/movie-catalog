@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '@/components/navbar/pagemovie-catalog'
+import Navbar from '@/ui/navbar/pagemovie-catalog'
 import ReactQueryProvider from '../util/react-query/provider'
 import ThemeProvider from '../ui/theme/theme-provider'
 import { StyledApp } from './styles'

@@ -1,7 +1,7 @@
 import { Typography, styled } from '@mui/material'
 
-const StyledTypography = styled(Typography)(({ theme }) => ({
+const StyledNavbarTitle = styled(Typography)(({ theme }) => ({
   fontWeight: theme.typography.fontWeightBold,
 }))
 
-export { StyledTypography }
+export { StyledNavbarTitle }
