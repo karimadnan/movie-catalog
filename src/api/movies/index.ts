@@ -1,5 +1,5 @@
 import { type AxiosResponse } from 'axios'
-import axios from '@/app/util/axiosmovie-catalog'
+import axios from '@/util/axiosmovie-catalog'
 import { type MoviesResponse } from './types'
 import { topRatedMoviesURL } from './constant'
 

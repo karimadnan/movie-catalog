@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '@/components/navbar/pagemovie-catalog'
-import ReactQueryProvider from './util/react-query/provider'
-import ThemeProvider from './ui/Theme/theme-provider'
+import ReactQueryProvider from '../util/react-query/provider'
+import ThemeProvider from '../ui/theme/theme-provider'
 import { StyledApp } from './styles'
 
 export const metadata = {

@@ -21,6 +21,7 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
+    'jsx-a11y/click-events-have-key-events': 'off',
     'react/no-array-index-key': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',

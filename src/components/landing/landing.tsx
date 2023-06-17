@@ -1,27 +1,28 @@
 'use client'
 
-import { getTopRatedMoviesList } from '@/app/api/moviesmovie-catalog'
+import { getTopRatedMoviesList } from '@/api/moviesmovie-catalog'
 import { IconButton } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
-import { type Movie } from '@/app/api/movies/typesmovie-catalog'
-import { useDebounce } from '@/app/util/hooks/useDebouncemovie-catalog'
+import { useDebounce } from '@/util/hooks/useDebouncemovie-catalog'
+import { type Movie } from '@/app/common-typesmovie-catalog'
+import { remapMoviesData } from '@/util/configmovie-catalog'
 import {
   StyledContainer,
   StyledInputBase,
   StyledMovieCardsContainer,
   StyledSearchBar,
 } from './styles'
-import MovieCard from '../movie-card/movie-card'
 import Loading from './loading'
+import MoviesList from '../movies-list/page'
 
 export default function Landing() {
   const page = useRef(1)
   const [movies, setMovies] = useState<Movie[]>([])
   const [searchQuery, setSearchQuery] = useState('')
   const debounce = useDebounce()
-  const lastCard = useRef<HTMLDivElement>(null)
+  const lastCardRef = useRef<HTMLDivElement>(null)
 
   const {
     data,
@@ -43,7 +44,7 @@ export default function Landing() {
       To avoid server side rendering errors, 
       declare browser APIs on component mount.
     */
-    if (lastCard.current === null) return
+    if (lastCardRef.current === null) return
     const cardObserver = new IntersectionObserver(
       ([movie]) => {
         /* 
@@ -60,12 +61,13 @@ export default function Landing() {
         threshold: 0.2,
       }
     )
-    cardObserver.observe(lastCard.current)
+    cardObserver.observe(lastCardRef.current)
   }, [movies])
 
   useEffect(() => {
     if (results.length > 0) {
-      setMovies((prevMovies) => [...prevMovies, ...results])
+      const newMovies = remapMoviesData(results)
+      setMovies((prevMovies) => [...prevMovies, ...newMovies])
     }
   }, [results])
 
@@ -101,29 +103,7 @@ export default function Landing() {
         </StyledSearchBar>
       </StyledContainer>
       <StyledMovieCardsContainer>
-        {filteredMovies.map(
-          (
-            {
-              title,
-              release_date: releaseDate,
-              backdrop_path: backdropPath,
-              id,
-            },
-            index
-          ) => (
-            <div
-              key={`${index}-${id}-${title}`}
-              ref={index + 1 === movies.length ? lastCard : null}
-            >
-              <MovieCard
-                title={title}
-                releaseDate={releaseDate}
-                imgPath={backdropPath}
-                id={id}
-              />
-            </div>
-          )
-        )}
+        <MoviesList movies={filteredMovies} lastCardRef={lastCardRef} />
         {isLoadingMoreMovies && <Loading />}
       </StyledMovieCardsContainer>
     </>
