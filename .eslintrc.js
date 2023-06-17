@@ -21,6 +21,8 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
+    'react/no-array-index-key': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/triple-slash-reference': 'off',
     '@typescript-eslint/promise-function-async': 'off',
