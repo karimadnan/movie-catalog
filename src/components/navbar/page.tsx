@@ -7,7 +7,7 @@ import { StyledTypography } from './style'
 
 export default function Navbar() {
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Toolbar>
         <LiveTvIcon color="secondary" fontSize="large" />
         <StyledTypography
