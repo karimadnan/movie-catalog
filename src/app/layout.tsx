@@ -1,7 +1,8 @@
 import React from 'react'
-import Navbar from '@/app/ui/Navbar/pagemovie-catalog'
-import Providers from './util/react-query/provider'
+import Navbar from '@/components/navbar/pagemovie-catalog'
+import ReactQueryProvider from './util/react-query/provider'
 import ThemeProvider from './ui/Theme/theme-provider'
+import { StyledApp } from './styles'
 
 export const metadata = {
   title: 'Movie-Catalog',
@@ -16,12 +17,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>
+        <ReactQueryProvider>
           <ThemeProvider>
-            <Navbar />
-            {children}
+            <StyledApp>
+              <Navbar />
+              {children}
+            </StyledApp>
           </ThemeProvider>
-        </Providers>
+        </ReactQueryProvider>
       </body>
     </html>
   )
