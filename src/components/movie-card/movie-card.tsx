@@ -31,7 +31,7 @@ MovieCardDetails) {
           component="img"
           height={cardHeight}
           image={constructCardImageURL}
-          alt={`${title}-poster`}
+          alt={`${title}-movie-poster`}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" noWrap>
