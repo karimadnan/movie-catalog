@@ -9,6 +9,7 @@ import {
   StyledMovieContainer,
   StyledMovieDetailsContainer,
 } from '@/ui/common/stylesmovie-catalog'
+import { movieDetailsPoster } from '@/ui/constantsmovie-catalog'
 import { StyledImage } from './styles'
 
 export default function Movie({ params }: MovieDetailsProps) {
@@ -36,8 +37,8 @@ export default function Movie({ params }: MovieDetailsProps) {
       <StyledImage
         src={moviePoaster}
         alt={`${title}-poster`}
-        width={300}
-        height={450}
+        width={movieDetailsPoster.width}
+        height={movieDetailsPoster.height}
         loading="lazy"
       />
       <StyledMovieDetailsContainer>

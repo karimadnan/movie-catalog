@@ -5,13 +5,14 @@ import {
   StyledMovieContainer,
   StyledMovieDetailsContainer,
 } from '../common/styles'
+import { movieDetailsPoster } from '../constants'
 
 export default function MovieDetailsSkeleton() {
   return (
     <StyledMovieContainer>
       <Skeleton
-        width={300}
-        height={450}
+        width={movieDetailsPoster.width}
+        height={movieDetailsPoster.height}
         sx={{ borderRadius: 1 }}
         animation="wave"
         variant="rectangular"

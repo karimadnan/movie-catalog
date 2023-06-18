@@ -1,3 +1,8 @@
 const cardHeight = 300
 
-export { cardHeight }
+const movieDetailsPoster = {
+  height: 450,
+  width: 300,
+}
+
+export { cardHeight, movieDetailsPoster }
