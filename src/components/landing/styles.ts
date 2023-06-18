@@ -16,6 +16,7 @@ const StyledSearchBar = styled('div')(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   caretColor: theme.palette.secondary.main,
+  width: '90%',
 }))
 
 export { StyledSearchBar, StyledInputBase }

@@ -6,20 +6,22 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
 import { useDebounce } from '@/util/hooks/useDebouncemovie-catalog'
-import { type Movie } from '@/app/common-typesmovie-catalog'
 import { remapMoviesData } from '@/util/configmovie-catalog'
 import MoviesListSkeleton from '@/ui/loading/movies-list-skeletonmovie-catalog'
 import MoviesList from '@/ui/movies-list/pagemovie-catalog'
+import { useMoviesStore } from '@/store/moviesmovie-catalog'
 import styles from '../../ui/common/global.module.css'
 import { StyledInputBase, StyledSearchBar } from './styles'
 
 export default function TopRatedMovies() {
   const page = useRef(1)
-  const [movies, setMovies] = useState<Movie[]>([])
   const [searchQuery, setSearchQuery] = useState('')
   const debounce = useDebounce()
   const lastCardRef = useRef<HTMLDivElement>(null)
-  const isComponentMounted = useRef(false)
+  const { movies, setMovies } = useMoviesStore((state) => ({
+    movies: state.movies,
+    setMovies: state.setMovies,
+  }))
 
   const {
     data,
@@ -61,12 +63,10 @@ export default function TopRatedMovies() {
   }, [movies])
 
   useEffect(() => {
-    if (results.length > 0 && isComponentMounted.current) {
+    if (results.length > 0) {
       const newMovies = remapMoviesData(results)
-      setMovies((prevMovies) => [...prevMovies, ...newMovies])
+      setMovies(newMovies)
     }
-    // Hack to avoid react query duplicating movies with pre-fetching
-    isComponentMounted.current = true
   }, [results])
 
   const onSearch = (query: string) => {

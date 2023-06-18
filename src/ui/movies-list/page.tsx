@@ -21,7 +21,7 @@ export default function MoviesList({ movies, lastCardRef }: MoviesListProps) {
             role="button"
             tabIndex={index}
             onClick={() => {
-              router.push(`/movies/${id}`)
+              router.push(`/movie/${id}`)
             }}
           >
             <MovieCard
