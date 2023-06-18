@@ -14,8 +14,8 @@ Create .env.local file in your directory with the following keys:
 | Key                | Value                      |
 | ------------------ | -------------------------- |
 | API_KEY            | Your movie DB API KEY      |
-| API_BASE_URL       | The movie db base api URL  |
-| API_IMAGE_BASE_URL | The movie db CDN image URL |
+| API_BASE_URL       | https://api.themoviedb.org |
+| API_IMAGE_BASE_URL | https://image.tmdb.org/t/p |
 
 ## How to run
 
