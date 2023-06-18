@@ -18,10 +18,8 @@ export default function TopRatedMovies() {
   const [searchQuery, setSearchQuery] = useState('')
   const debounce = useDebounce()
   const lastCardRef = useRef<HTMLDivElement>(null)
-  const { movies, setMovies } = useMoviesStore((state) => ({
-    movies: state.movies,
-    setMovies: state.setMovies,
-  }))
+  const movies = useMoviesStore((state) => state.movies)
+  const setMovies = useMoviesStore((state) => state.setMovies)
 
   const {
     data,
