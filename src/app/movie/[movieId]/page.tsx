@@ -7,7 +7,7 @@ import { type MovieDetailsProps } from './types'
 export default async function Page(props: MovieDetailsProps) {
   const queryClient = getQueryClient()
   await queryClient.prefetchQuery(['movie-details'], () =>
-    // Pre-fetch movie details on server and pass down to client
+    // Pre-fetch movie details when hovering over movie card
     getMovieDetails(props.params.movieId)
   )
   const dehydratedState = dehydrate(queryClient)

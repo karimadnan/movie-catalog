@@ -8,7 +8,7 @@ export interface MoviesStore {
 
 export const useMoviesStore = create<MoviesStore>((set) => ({
   movies: [],
-  setMovies: (movies: Movie[]) => {
-    set((state) => ({ movies: [...state.movies, ...movies] }))
+  setMovies: (newMovies: Movie[]) => {
+    set((state) => ({ movies: [...state.movies, ...newMovies] }))
   },
 }))

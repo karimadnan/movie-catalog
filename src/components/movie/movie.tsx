@@ -6,10 +6,10 @@ import { useQuery } from '@tanstack/react-query'
 import { Typography } from '@mui/material'
 import { constructImageURL } from '@/util/configmovie-catalog'
 import {
-  StyledImage,
   StyledMovieContainer,
   StyledMovieDetailsContainer,
-} from './styles'
+} from '@/ui/common/stylesmovie-catalog'
+import { StyledImage } from './styles'
 
 export default function Movie({ params }: MovieDetailsProps) {
   const { data } = useQuery({
@@ -38,6 +38,7 @@ export default function Movie({ params }: MovieDetailsProps) {
         alt={`${title}-poster`}
         width={300}
         height={450}
+        loading="lazy"
       />
       <StyledMovieDetailsContainer>
         <Typography
