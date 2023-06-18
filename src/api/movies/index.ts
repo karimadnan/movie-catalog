@@ -5,8 +5,8 @@ import { topRatedMoviesURL } from './constant'
 
 export const getTopRatedMoviesList = async (
   page: number
-): Promise<AxiosResponse<MoviesResponse>> => {
+): Promise<MoviesResponse> => {
   const url = `${topRatedMoviesURL}?language=en-US&page=${page}`
   const response: AxiosResponse<MoviesResponse> = await axios.get(url)
-  return response
+  return response.data
 }

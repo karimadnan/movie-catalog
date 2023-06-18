@@ -8,21 +8,18 @@ import SearchIcon from '@mui/icons-material/Search'
 import { useDebounce } from '@/util/hooks/useDebouncemovie-catalog'
 import { type Movie } from '@/app/common-typesmovie-catalog'
 import { remapMoviesData } from '@/util/configmovie-catalog'
-import {
-  StyledContainer,
-  StyledInputBase,
-  StyledMovieCardsContainer,
-  StyledSearchBar,
-} from './styles'
-import Loading from './loading'
-import MoviesList from '../movies-list/page'
+import MoviesListSkeleton from '@/ui/loading/movies-list-skeletonmovie-catalog'
+import MoviesList from '@/ui/movies-list/pagemovie-catalog'
+import styles from '../../ui/common/global.module.css'
+import { StyledInputBase, StyledSearchBar } from './styles'
 
-export default function Landing() {
+export default function TopRatedMovies() {
   const page = useRef(1)
   const [movies, setMovies] = useState<Movie[]>([])
   const [searchQuery, setSearchQuery] = useState('')
   const debounce = useDebounce()
   const lastCardRef = useRef<HTMLDivElement>(null)
+  const isComponentMounted = useRef(false)
 
   const {
     data,
@@ -30,14 +27,13 @@ export default function Landing() {
     isRefetching: isMoviesRefetching,
     refetch: refetchMovies,
   } = useQuery({
-    queryKey: ['fetch-movies'],
+    queryKey: ['top-rated-movies'],
     queryFn: () => getTopRatedMoviesList(page.current),
   })
 
   const isLoadingMoreMovies = isMoviesLoading || isMoviesRefetching
 
-  const { data: { results = [], total_results: totalMovies = 0 } = {} } =
-    data ?? {}
+  const { results = [], total_results: totalMovies = 0 } = data ?? {}
 
   useEffect(() => {
     /* 
@@ -65,10 +61,12 @@ export default function Landing() {
   }, [movies])
 
   useEffect(() => {
-    if (results.length > 0) {
+    if (results.length > 0 && isComponentMounted.current) {
       const newMovies = remapMoviesData(results)
       setMovies((prevMovies) => [...prevMovies, ...newMovies])
     }
+    // Hack to avoid react query duplicating movies with pre-fetching
+    isComponentMounted.current = true
   }, [results])
 
   const onSearch = (query: string) => {
@@ -87,7 +85,7 @@ export default function Landing() {
 
   return (
     <>
-      <StyledContainer>
+      <div className={styles.searchContainer}>
         <StyledSearchBar>
           <IconButton type="button">
             <SearchIcon color="secondary" />
@@ -101,11 +99,9 @@ export default function Landing() {
             }}
           />
         </StyledSearchBar>
-      </StyledContainer>
-      <StyledMovieCardsContainer>
-        <MoviesList movies={filteredMovies} lastCardRef={lastCardRef} />
-        {isLoadingMoreMovies && <Loading />}
-      </StyledMovieCardsContainer>
+      </div>
+      <MoviesList movies={filteredMovies} lastCardRef={lastCardRef} />
+      {isLoadingMoreMovies && <MoviesListSkeleton />}
     </>
   )
 }

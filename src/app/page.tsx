@@ -1,9 +1,9 @@
-import Landing from '@/components/landing/landingmovie-catalog'
+import Movies from './movies/page'
 
 export default function Home() {
   return (
     <main>
-      <Landing />
+      <Movies />
     </main>
   )
 }
