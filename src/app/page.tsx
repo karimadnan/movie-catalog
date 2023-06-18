@@ -5,7 +5,7 @@ import TopRatedMovies from '@/components/landing/top-rated-moviesmovie-catalog'
 
 export default async function Movies() {
   const queryClient = getQueryClient()
-  await queryClient.prefetchQuery(['top-rated-movies-1'], () =>
+  await queryClient.prefetchQuery(['top-rated-movies'], () =>
     // Pre-fetch first movies page on server and pass down to client
     getTopRatedMoviesList(1)
   )

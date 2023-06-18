@@ -14,12 +14,18 @@ import styles from '../../ui/common/global.module.css'
 import { StyledInputBase, StyledSearchBar } from './styles'
 
 export default function TopRatedMovies() {
-  const page = useRef(1)
   const [searchQuery, setSearchQuery] = useState('')
   const debounce = useDebounce()
   const lastCardRef = useRef<HTMLDivElement>(null)
+
   const movies = useMoviesStore((state) => state.movies)
   const setMovies = useMoviesStore((state) => state.setMovies)
+
+  const pagesLoaded = useMoviesStore((state) => state.pagesLoaded)
+  const setPagesLoaded = useMoviesStore((state) => state.setPagesLoaded)
+
+  // Last page loaded or fallback to first one
+  const page = useRef(pagesLoaded[pagesLoaded.length - 1] ?? 1)
 
   const {
     data,
@@ -27,13 +33,17 @@ export default function TopRatedMovies() {
     isRefetching: isMoviesRefetching,
     refetch: refetchMovies,
   } = useQuery({
-    queryKey: [`top-rated-movies-${page.current}`],
+    queryKey: ['top-rated-movies'],
     queryFn: () => getTopRatedMoviesList(page.current),
   })
 
   const isLoadingMoreMovies = isMoviesLoading || isMoviesRefetching
 
-  const { results = [], total_results: totalMovies = 0 } = data ?? {}
+  const {
+    results = [],
+    total_results: totalMovies = 0,
+    page: currentPage = 1,
+  } = data ?? {}
 
   useEffect(() => {
     /* 
@@ -62,8 +72,15 @@ export default function TopRatedMovies() {
 
   useEffect(() => {
     if (results.length > 0) {
-      const newMovies = remapMoviesData(results)
-      setMovies(newMovies)
+      setPagesLoaded(currentPage)
+      /* 
+        Keep track of loaded pages, 
+        to avoid duplicating pages with pre-fetching method
+      */
+      if (!pagesLoaded.includes(currentPage)) {
+        const newMovies = remapMoviesData(results)
+        setMovies(newMovies)
+      }
     }
   }, [results])
 
