@@ -14,7 +14,7 @@ import { StyledImage } from './styles'
 
 export default function Movie({ params }: MovieDetailsProps) {
   const { data } = useQuery({
-    queryKey: ['movie-details'],
+    queryKey: [`movie-details-${params.movieId}`],
     queryFn: () => getMovieDetails(params.movieId),
   })
 

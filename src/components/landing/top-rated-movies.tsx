@@ -27,7 +27,7 @@ export default function TopRatedMovies() {
     isRefetching: isMoviesRefetching,
     refetch: refetchMovies,
   } = useQuery({
-    queryKey: ['top-rated-movies'],
+    queryKey: [`top-rated-movies-${page.current}`],
     queryFn: () => getTopRatedMoviesList(page.current),
   })
 
