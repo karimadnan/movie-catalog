@@ -17,6 +17,9 @@ Create .env.local file in your directory with the following keys:
 | API_BASE_URL       | https://api.themoviedb.org |
 | API_IMAGE_BASE_URL | https://image.tmdb.org/t/p |
 
+Install prettier and add it as your default document formatter,
+for a better experience with ESlint since this app use it.
+
 ## How to run
 
 ```
